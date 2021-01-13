@@ -11,8 +11,9 @@ from .pagination import CustomNumberPagination
 
 
 
+# This BankBranch is for fetching the details of the branches with given bank_name and city
   
-class Bank_branch(generics.ListAPIView):
+class BankBranch(generics.ListAPIView):
     permission_classes = (IsAuthenticated,) 
     queryset = Banks.objects.all()
     serializer_class = BanksSerializer
@@ -31,9 +32,8 @@ class Bank_branch(generics.ListAPIView):
        return Response(serializer.data)
 
 
-
-
-class Bank_ifsc(generics.ListAPIView): 
+# This Bankranch Class is for fetching the bank details of given ifsc code
+class BankIfsc(generics.ListAPIView): 
     permission_classes = (IsAuthenticated,) 
     queryset = Banks.objects.all()
     serializer_class = BanksSerializer
