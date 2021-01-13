@@ -1,0 +1,15 @@
+This command is using for getting the token
+
+1.  curl -X POST -F 'username=admin' -F 'password=admin' https://faismfanu.herokuapp.com/apis/token/
+
+This command is using for fetching the bank details of a specific ifsc code 
+
+2. curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjEwOTgzMjY3LCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSJ9.BVsmBEosw7J2P0FR5DG5tfuVWsh5_YY2LQKvCgt54lA" https://faismfanu.herokuapp.com/api/ANDB0001320
+
+This command is using for setching the all branches with the bank name and city
+
+3. curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjEwOTgzMjY3LCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSJ9.BVsmBEosw7/2P0FR5DG5tfuVWsh5_YY2LQKvCgt54lA" https://faismfanu.herokuapp.com/api/ANDHRA%20BANK/DELHI
+
+This command is using for getting the above mentioneed things with limit and offset
+
+4. curl -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjEwOTgzMjY3LCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSJ9.BVsmBEosw7J2P0FR5DG5tfuVWsh5_YY2LQKvCgt54lA" https://faismfanu.herokuapp.com/api/ANDHRA%20BANK/DELHI/?limit=5&offset=5
