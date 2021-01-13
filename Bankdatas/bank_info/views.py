@@ -1,32 +1,52 @@
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.views import status
 from rest_framework.permissions import IsAuthenticated
 from .models import Banks
 from .serializers import BanksSerializer
+from rest_framework.pagination import LimitOffsetPagination
+from rest_framework import viewsets
+
+from .pagination import CustomNumberPagination
+
 
 
   
-class Bank_ifsc(generics.ListCreateAPIView): 
+class Bank_branch(generics.ListAPIView):
+    # permission_classes = (IsAuthenticated,) 
+    queryset = Banks.objects.all()
+    serializer_class = BanksSerializer
+    pagination_class = LimitOffsetPagination
+    
+
+
+    def get(self, request, bank_name, city):
+       queryset = Banks.objects.filter(city__iexact=city, bank_name__icontains=bank_name)
+       page = self.paginate_queryset(queryset)
+       if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+       serializer = self.get_serializer(queryset, many=True)
+       return Response(serializer.data)
+
+
+
+
+class Bank_ifsc(generics.ListAPIView): 
     # permission_classes = (IsAuthenticated,) 
 
     queryset = Banks.objects.all()
     serializer_class = BanksSerializer
-    def get(self, request, ifsc):
-        bank_ifsc = Banks.objects.get(ifsc=ifsc)
-        return Response(BanksSerializer(bank_ifsc).data)    
+    def get(self, request, *args, **kwargs):
+        try:
+            bank = self.queryset.get(ifsc=kwargs["ifsc"])
+            return Response(BanksSerializer(bank).data) 
+        except Banks.DoesNotExist:
+            return Response(data={"message": "Bank with ifsc does not exist"},status=status.HTTP_404_NOT_FOUND)
+
 
 
  
-class Bank_branch(generics.ListCreateAPIView):
-    # permission_classes = (IsAuthenticated,) 
 
-    queryset = Banks.objects.all()
-    serializer_class = BanksSerializer
-    def get(self, request, bank_name, city):
-        bank_details = Banks.objects.filter(
-            bank_name__icontains = bank_name,
-            city__iexact = city
-        )
-        serializer = BanksSerializer(bank_details, many=True)
-        return Response(serializer.data)
 

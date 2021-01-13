@@ -45,6 +45,10 @@ INSTALLED_APPS = [
     'rest_framework'
 ]
 
+
+
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -159,19 +163,16 @@ SIMPLE_JWT = {
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
-}
-
-REST_FRAMEWORK = {
-
-   'DEFAULT_PERMISSION_CLASSES': ( 'rest_framework.permissions.IsAdminUser', ),
-   
-}
-
-
-REST_FRAMEWORK = { 
     'DEFAULT_AUTHENTICATION_CLASSES': [ 
         'rest_framework_simplejwt.authentication.JWTAuthentication', 
     ], 
-} 
+
+    'DEFAULT_PERMISSION _CLASSES': [ 
+        'rest_framework.permissions.IsAuthenticated', 
+    ], 
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    
+    
+
+}
+
