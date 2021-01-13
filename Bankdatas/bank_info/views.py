@@ -13,7 +13,7 @@ from .pagination import CustomNumberPagination
 
   
 class Bank_branch(generics.ListAPIView):
-    # permission_classes = (IsAuthenticated,) 
+    permission_classes = (IsAuthenticated,) 
     queryset = Banks.objects.all()
     serializer_class = BanksSerializer
     pagination_class = LimitOffsetPagination
@@ -34,8 +34,7 @@ class Bank_branch(generics.ListAPIView):
 
 
 class Bank_ifsc(generics.ListAPIView): 
-    # permission_classes = (IsAuthenticated,) 
-
+    permission_classes = (IsAuthenticated,) 
     queryset = Banks.objects.all()
     serializer_class = BanksSerializer
     def get(self, request, *args, **kwargs):
